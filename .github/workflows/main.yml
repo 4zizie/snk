@@ -5,11 +5,14 @@ on:
     - cron: "0 0 * * *"  # setiap hari
   workflow_dispatch:      # bisa dijalankan manual juga
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: Platane/snk@master
+      - uses: Platane/snk@v2
         with:
           github_user_name: 4zizie
           outputs: dist
