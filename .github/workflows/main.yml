@@ -2,18 +2,18 @@ name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch:
+    - cron: "0 0 * * *"  # jalan setiap hari jam 00:00 UTC
+  workflow_dispatch:      # bisa dijalankan manual
 
 permissions:
-  contents: write
+  contents: write  # agar bisa push ke branch output
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
       - name: Generate snake animation
-        uses: Platane/snk@v3.1.0
+        uses: Platane/snk@v3.1.0  # versi stabil terbaru
         with:
           github_user_name: 4zizie
           outputs_branch: output
