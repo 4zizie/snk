@@ -2,18 +2,26 @@ name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # jalan setiap hari jam 00:00 UTC
-  workflow_dispatch:      # bisa dijalankan manual
+    - cron: "0 0 * * *"  # setiap hari jam 00:00 UTC
+  workflow_dispatch:
 
 permissions:
-  contents: write  # agar bisa push ke branch output
+  contents: write  # penting agar bisa push ke repo
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate snake animation
-        uses: Platane/snk@v3.1.0  # versi stabil terbaru
+      - name: Generate GitHub Snake
+        uses: Platane/snk@v3
         with:
           github_user_name: 4zizie
-          outputs_branch: output
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+      - name: Push to GitHub
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
