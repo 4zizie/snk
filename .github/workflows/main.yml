@@ -1,9 +1,9 @@
-name: generate snake
+name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 0 * * *" # setiap tengah malam
-  workflow_dispatch:
+    - cron: "0 0 * * *"  # setiap hari
+  workflow_dispatch:      # bisa dijalankan manual juga
 
 jobs:
   generate:
@@ -11,12 +11,10 @@ jobs:
     steps:
       - uses: Platane/snk@master
         with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/github-snake.svg
-            dist/github-snake-dark.svg?palette=github-dark
+          github_user_name: 4zizie
+          outputs: dist
 
-      - name: push snake
+      - name: Push to GitHub
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: output
